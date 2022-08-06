@@ -5,6 +5,7 @@ var Config *config
 type config struct {
 	Log    Log
 	Server Server
+	Redis  RedisConf
 }
 
 type Log struct {
@@ -20,4 +21,13 @@ type Log struct {
 
 type Server struct {
 	Port int
+}
+
+type RedisConf struct {
+	Tag         string
+	Host        string
+	Port        string
+	Password    string
+	MaxIdle     int
+	IdleTimeout int
 }

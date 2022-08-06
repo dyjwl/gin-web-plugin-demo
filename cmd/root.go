@@ -7,8 +7,10 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/dyjwl/gin-web-plugin-demo/cmd/crontab"
 	gindemo "github.com/dyjwl/gin-web-plugin-demo/cmd/gin-demo"
 	"github.com/dyjwl/gin-web-plugin-demo/configs"
+	"github.com/dyjwl/gin-web-plugin-demo/pkg/cache"
 	"github.com/dyjwl/gin-web-plugin-demo/pkg/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -34,6 +36,9 @@ to quickly create a Cobra application.`,
 		// has an action associated with it:
 		Run: func(cmd *cobra.Command, args []string) {
 			log.InitLog()
+			cache.SyncRedis = cache.NewClient(configs.Config.Redis)
+			cache.InitRedSync(cache.SyncRedis)
+			crontab.Run()
 			log.Info("app run,config: ", zap.Any("config", configs.Config))
 			gindemo.StartServer()
 		},

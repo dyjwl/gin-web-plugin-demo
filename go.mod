@@ -4,6 +4,9 @@ go 1.19
 
 require (
 	github.com/gin-gonic/gin v1.8.1
+	github.com/go-redsync/redsync v1.4.2
+	github.com/gomodule/redigo v2.0.0+incompatible
+	github.com/robfig/cron v1.2.0
 	github.com/spf13/cobra v1.5.0
 	github.com/spf13/viper v1.12.0
 	go.uber.org/zap v1.21.0
@@ -17,6 +20,8 @@ require (
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator/v10 v10.10.0 // indirect
 	github.com/goccy/go-json v0.9.7 // indirect
+	github.com/hashicorp/errwrap v1.0.0 // indirect
+	github.com/hashicorp/go-multierror v1.0.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
