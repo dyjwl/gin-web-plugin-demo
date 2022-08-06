@@ -30,6 +30,6 @@ func (u *users) DeleteCollection(ctx context.Context, usernames []string) error 
 func (u *users) Get(ctx context.Context, username string) (*model.User, error) {
 	return nil, nil
 }
-func (u *users) List(ctx context.Context) (*model.UserList, error) {
+func (u *users) List(ctx context.Context, pageSize, pageNo int, name string) (*model.UserList, error) {
 	return nil, nil
 }

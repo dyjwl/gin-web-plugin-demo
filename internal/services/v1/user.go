@@ -17,7 +17,7 @@ type UserSrv interface {
 	Delete(ctx context.Context, username string) error
 	DeleteCollection(ctx context.Context, usernames []string) error
 	Get(ctx context.Context, username string) (*model.User, error)
-	List(ctx context.Context) (*model.UserList, error)
+	List(ctx context.Context, pageSize, pageNo int, name string) (*model.UserList, error)
 	ChangePassword(ctx context.Context, user *model.User) error
 }
 
@@ -28,8 +28,8 @@ type userService struct {
 var _ UserSrv = (*userService)(nil)
 
 // List returns user list in the storage. This function has a good performance.
-func (u *userService) List(ctx context.Context) (*model.UserList, error) {
-	users, err := u.store.Users().List(ctx)
+func (u *userService) List(ctx context.Context, pageSize, pageNo int, name string) (*model.UserList, error) {
+	users, err := u.store.Users().List(ctx, pageSize, pageNo, name)
 	if err != nil {
 		log.Error("list users from storage failed: %s", zap.Error(err))
 		return nil, err

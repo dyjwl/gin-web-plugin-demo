@@ -13,5 +13,5 @@ type UserStore interface {
 	Delete(ctx context.Context, username string) error
 	DeleteCollection(ctx context.Context, usernames []string) error
 	Get(ctx context.Context, username string) (*model.User, error)
-	List(ctx context.Context) (*model.UserList, error)
+	List(ctx context.Context, pageSize, pageNo int, name string) (*model.UserList, error)
 }
