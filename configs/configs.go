@@ -3,9 +3,10 @@ package configs
 var Config *config
 
 type config struct {
-	Log    Log
-	Server Server
-	Redis  RedisConf
+	Log      Log
+	Server   Server
+	Redis    RedisConf
+	Database Database
 }
 
 type Log struct {
@@ -30,4 +31,16 @@ type RedisConf struct {
 	Password    string
 	MaxIdle     int
 	IdleTimeout int
+}
+
+type Database struct {
+	LogZap   bool
+	LogMode  string
+	Host     string
+	Port     int
+	User     string
+	Schema   string
+	Password string
+	Database string
+	Dialect  string
 }

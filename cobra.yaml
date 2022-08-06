@@ -19,3 +19,15 @@ redis:
   password:
   maxidle: 3
   idletimeout: 240
+
+
+database:
+  host: localhost
+  port: 13306
+  user: root
+  password: zjw@123456
+  database: gindemo
+  schema: public
+  dialect: mysql
+  logmode: "info"
+  logzap: true
