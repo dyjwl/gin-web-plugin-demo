@@ -1,0 +1,13 @@
+log:
+  filename: ""
+  loglevel: "info"
+  logmode: "development"
+  maxsize: 500
+  maxage: 28
+  compress: true
+  withcolor: true
+  showline: true
+
+
+server:
+  port: 8080
