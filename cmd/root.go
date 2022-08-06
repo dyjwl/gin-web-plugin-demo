@@ -10,6 +10,10 @@ import (
 	"github.com/dyjwl/gin-web-plugin-demo/cmd/crontab"
 	gindemo "github.com/dyjwl/gin-web-plugin-demo/cmd/gin-demo"
 	"github.com/dyjwl/gin-web-plugin-demo/configs"
+	"github.com/dyjwl/gin-web-plugin-demo/internal/store"
+	"github.com/dyjwl/gin-web-plugin-demo/internal/store/mysql"
+	"github.com/dyjwl/gin-web-plugin-demo/internal/store/pg"
+	"github.com/dyjwl/gin-web-plugin-demo/internal/store/sqlite"
 	"github.com/dyjwl/gin-web-plugin-demo/pkg/cache"
 	"github.com/dyjwl/gin-web-plugin-demo/pkg/log"
 	"github.com/spf13/cobra"
@@ -38,6 +42,18 @@ to quickly create a Cobra application.`,
 			log.InitLog()
 			cache.SyncRedis = cache.NewClient(configs.Config.Redis)
 			cache.InitRedSync(cache.SyncRedis)
+			switch configs.Config.Database.Dialect {
+			case "mysql":
+				storeIns, _ := mysql.GetMysqlFactoryOr(&configs.Config.Database)
+				store.SetClient(storeIns)
+			case "postgres":
+				storeIns, _ := pg.GetPgFactoryOr(&configs.Config.Database)
+				store.SetClient(storeIns)
+			case "sqlite":
+				storeIns, _ := sqlite.GetSqliteFactoryOr(&configs.Config.Database)
+				store.SetClient(storeIns)
+			}
+
 			crontab.Run()
 			log.Info("app run,config: ", zap.Any("config", configs.Config))
 			gindemo.StartServer()
