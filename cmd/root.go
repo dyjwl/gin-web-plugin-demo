@@ -6,6 +6,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/dyjwl/gin-web-plugin-demo/cmd/crontab"
 	gindemo "github.com/dyjwl/gin-web-plugin-demo/cmd/gin-demo"
@@ -42,6 +43,7 @@ to quickly create a Cobra application.`,
 			log.InitLog()
 			cache.SyncRedis = cache.NewClient(configs.Config.Redis)
 			cache.InitRedSync(cache.SyncRedis)
+			log.Info("config", zap.Any("content", configs.Config))
 			switch configs.Config.Database.Dialect {
 			case "mysql":
 				storeIns, _ := mysql.GetMysqlFactoryOr(&configs.Config.Database)
@@ -93,7 +95,8 @@ func initConfig() {
 		viper.SetConfigType("yaml")
 		viper.SetConfigName(".cobra")
 	}
-
+	viper.SetEnvPrefix("GENDEMO")
+	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_", "-", "_"))
 	viper.AutomaticEnv()
 
 	if err := viper.ReadInConfig(); err != nil {

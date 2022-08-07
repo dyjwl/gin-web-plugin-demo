@@ -49,10 +49,11 @@ func New(opts *Options) (*gorm.DB, error) {
 		sqlDB.SetConnMaxLifetime(opts.MaxConnectionLifeTime)
 		return db, nil
 	case "mysql":
-		dsn := fmt.Sprintf(`%s:%s@tcp(%s)/%s?charset=utf8&parseTime=%t&loc=%s`,
+		dsn := fmt.Sprintf(`%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=%t&loc=%s`,
 			opts.Username,
 			opts.Password,
 			opts.Host,
+			opts.Port,
 			opts.Database,
 			true,
 			"Local")

@@ -14,7 +14,8 @@ RUN go env -w GO111MODULE=on \
 
 FROM alpine:latest 
 
-RUN mkdir -p /app
+RUN mkdir -p /app  \
+    && apk add --no-cache tzdata
 WORKDIR /app
 
 COPY --from=0 /app/main ./

@@ -1,7 +1,7 @@
 package resp
 
 const (
-	Success       = 0
+	Success       = 20000
 	ErrBadRequest = 10400
 	// ErrInvalidAuthHeader - 401: Invalid authorization header.
 	ErrInvalidAuthHeader = 10401

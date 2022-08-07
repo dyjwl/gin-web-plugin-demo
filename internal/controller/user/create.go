@@ -1,6 +1,8 @@
 package user
 
 import (
+	"time"
+
 	"github.com/dyjwl/gin-web-plugin-demo/internal/store/model"
 	"github.com/dyjwl/gin-web-plugin-demo/pkg/auth"
 	"github.com/dyjwl/gin-web-plugin-demo/pkg/log"
@@ -19,6 +21,7 @@ func (u *UserController) Create(c *gin.Context) {
 	}
 
 	r.Password, _ = auth.Encrypt(r.Password)
+	r.LoginedAt = time.Now()
 	// Insert the user to the storage.
 	if err := u.srv.Users().Create(c, &r); err != nil {
 		resp.JSON(c, resp.ErrInternalServer, nil)

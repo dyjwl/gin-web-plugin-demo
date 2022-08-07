@@ -129,6 +129,7 @@ func (task *Task) Retry(n int) *Task {
 func (task *Task) DoCron(spec string) *Task {
 	task.spec = spec
 	if err := task.ctx.Cron.AddFunc(task.spec, task.f); err != nil {
+		log.Error("do cron error", zap.Error(err))
 		panic(err)
 	}
 	return task

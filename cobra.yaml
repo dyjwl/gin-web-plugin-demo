@@ -14,8 +14,8 @@ server:
 
 redis:
   tag: test
-  host: 127.0.0.1
-  port: 16379
+  host: localhost
+  port: 6379
   password:
   maxidle: 3
   idletimeout: 240
@@ -23,7 +23,7 @@ redis:
 
 database:
   host: localhost
-  port: 13306
+  port: 3306
   user: root
   password: zjw@123456
   database: gindemo
