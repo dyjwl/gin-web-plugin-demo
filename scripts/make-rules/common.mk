@@ -22,7 +22,7 @@ endif
 # set the version number. you should not need to do this
 # for the majority of scenarios.
 ifeq ($(origin VERSION), undefined)
-VERSION := $(shell git describe --dirty --always --tags | sed 's/-/./2' | sed 's/-/./2' )
+VERSION := latest
 endif
 export VERSION
 

@@ -33,15 +33,7 @@ ifeq ($(origin GOBIN), undefined)
 endif
 
 PLATFORMS ?= darwin_amd64 windows_amd64 linux_amd64
-COMMANDS ?= $(wildcard ${ROOT_DIR}/cmd/*)
-BINS ?= $(foreach cmd,${COMMANDS},$(notdir ${cmd}))
-
-ifeq (${COMMANDS},)
-  $(error Could not determine COMMANDS, set ROOT_DIR or run in source dir)
-endif
-ifeq (${BINS},)
-  $(error Could not determine BINS, set ROOT_DIR or run in source dir)
-endif
+BINS ?= gin-demo
 
 .PHONY: go.build.verify
 go.build.verify:
@@ -56,8 +48,7 @@ go.build.%:
 	$(eval OS := $(word 1,$(subst _, ,$(PLATFORM))))
 	$(eval ARCH := $(word 2,$(subst _, ,$(PLATFORM))))
 	@echo "===========> Building binary $(COMMAND) $(VERSION) for $(OS) $(ARCH)"
-	@mkdir -p $(OUTPUT_DIR)/$(OS)/$(ARCH)
-	@CGO_ENABLED=0 GOOS=$(OS) GOARCH=$(ARCH) $(GO) build -o $(OUTPUT_DIR)/$(OS)/$(ARCH)/$(COMMAND)$(GO_OUT_EXT) -ldflags "$(GO_LDFLAGS)" $(ROOT_PACKAGE)/cmd/$(COMMAND)
+	@CGO_ENABLED=0 GOOS=$(OS) GOARCH=$(ARCH) $(GO) build -o main -ldflags "$(GO_LDFLAGS)" $(ROOT_PACKAGE)
 
 .PHONY: go.build
 go.build: go.build.verify $(addprefix go.build., $(addprefix $(PLATFORM)., $(BINS)))

@@ -1,7 +1,7 @@
 /*
 Copyright © 2022 NAME HERE <zhaosir_1993@163.com>
 */
-package gindemo
+package cmd
 
 import (
 	"fmt"
@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/dyjwl/gin-web-plugin-demo/cmd/crontab"
+	gindemo "github.com/dyjwl/gin-web-plugin-demo/cmd/gin-demo"
 	"github.com/dyjwl/gin-web-plugin-demo/configs"
 	"github.com/dyjwl/gin-web-plugin-demo/internal/store"
 	"github.com/dyjwl/gin-web-plugin-demo/internal/store/mysql"
@@ -57,7 +58,7 @@ to quickly create a Cobra application.`,
 
 			crontab.Run()
 			log.Info("app run,config: ", zap.Any("config", configs.Config))
-			StartServer()
+			gindemo.StartServer()
 		},
 	}
 )

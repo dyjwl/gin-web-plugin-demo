@@ -9,12 +9,7 @@ REGISTRY_PREFIX ?= zhaosir1993
 
 # Determine image files by looking into hack/docker/*.Dockerfile
 IMAGE_FILES=$(wildcard ${ROOT_DIR}/Dockerfile)
-# Determine images names by stripping out the dir names
-IMAGES=$(foreach image,${IMAGE_FILES},$(subst .Dockerfile,,$(notdir ${image})))
 
-ifeq (${IMAGES},)
-  $(error Could not determine IMAGES, set ROOT_DIR or run in source dir)
-endif
 
 .PHONY: image.build.verify
 image.build.verify:
@@ -24,10 +19,10 @@ endif
 	@echo "===========> Docker version verification passed"
 
 .PHONY: image.build
-image.build: image.build.verify go.build.verify $(addprefix image.build., $(IMAGES))
+image.build: image.build.verify go.build.verify $(addprefix image.push., gin-demo)
 
 .PHONY: image.push
-image.push: image.build.verify go.build.verify $(addprefix image.push., $(IMAGES))
+image.push: image.build.verify go.build.verify $(addprefix image.push., gin-demo)
 
 .PHONY: image.build.%
 image.build.%: go.build.linux_amd64.%
