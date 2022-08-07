@@ -18,6 +18,7 @@ services:
       context: ../../
       dockerfile: ./Dockerfile
     container_name: gin-demo
+    image: zhaosir1993/gin-demo:latest
     restart: always
     ports:
       - '8080:8080'
