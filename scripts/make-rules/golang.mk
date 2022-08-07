@@ -3,7 +3,7 @@
 #
 
 GO := go
-GO_SUPPORTED_VERSIONS ?= 1.11|1.12
+GO_SUPPORTED_VERSIONS ?= 1.17|1.18|1.19
 GO_LDFLAGS += -X $(VERSION_PACKAGE).GitVersion=$(VERSION) -X $(VERSION_PACKAGE).BuildDate=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
 
 ifeq ($(GOOS),windows)
