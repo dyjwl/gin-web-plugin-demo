@@ -1,0 +1,63 @@
+definitions:
+  User:
+    properties:
+      email:
+        type: string
+        x-go-name: Email
+      isAdmin:
+        format: int64
+        type: integer
+        x-go-name: IsAdmin
+      loginedAt:
+        format: date-time
+        type: string
+        x-go-name: LoginedAt
+      nickname:
+        type: string
+        x-go-name: Nickname
+      password:
+        type: string
+        x-go-name: Password
+      phone:
+        type: string
+        x-go-name: Phone
+      status:
+        format: int64
+        type: integer
+        x-go-name: Status
+    required:
+    - nickname
+    - password
+    - email
+    title: User represents a user restful resource. It is also used as gorm model.
+    type: object
+    x-go-package: github.com/dyjwl/gin-web-plugin-demo/internal/store/model
+info:
+  title: terracudaap backend API.
+paths:
+  /app/api/v1/user/register:
+    post:
+      description: 根据参数注册用户.
+      operationId: createUserRequest
+      parameters:
+      - description: User information.
+        in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/User'
+      responses:
+        "200":
+          $ref: '#/responses/okResponse'
+        default:
+          $ref: '#/responses/errResponse'
+      security:
+      - api_key: []
+      summary: 用户注册.
+      tags:
+      - users
+responses:
+  errResponse:
+    description: ""
+  okResponse:
+    description: Return nil json object.
+swagger: "2.0"
